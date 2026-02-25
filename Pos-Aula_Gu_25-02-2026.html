@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Resumo Pós-Aula — Gu — CZK English</title>
+
+  <style>
+    :root{
+      --page-bg: #f4f7fa;
+      --card-bg: #fff;
+      --accent: #2f86e6;
+      --accent-dark: #1f6fd1;
+      --green: #36b37e;
+      --muted: #6b7280;
+      --border: #e6eef8;
+      --box-radius: 12px;
+      --card-width: 720px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      padding:0;
+      background:var(--page-bg);
+      font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:48px 20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:var(--card-width);
+      background:var(--card-bg);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 6px 22px rgba(33,47,60,0.06);
+      border:1px solid rgba(15,33,64,0.03);
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:8px;
+    }
+
+    .badge{
+      background:linear-gradient(180deg,#fff,#f2fbff);
+      border:1px solid var(--border);
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--accent);
+      font-weight:700;
+      font-size:0.85rem;
+    }
+
+    h1{
+      margin:0;
+      font-size:1.3rem;
+      color:#0f1724;
+    }
+
+    .meta{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:6px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:none;
+      background:var(--accent);
+      color:#fff;
+      text-decoration:none;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 6px 14px rgba(47,134,230,0.12);
+    }
+
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    main{margin-top:18px;}
+    section{margin-top:18px;}
+
+    .panel{
+      background:#fbfdff;
+      border-radius:12px;
+      padding:16px;
+      border:1px solid var(--border);
+    }
+
+    .outline-card{
+      border-radius:10px;
+      border:1px solid var(--border);
+      padding:16px;
+      background:#fff;
+    }
+
+    /* Vocabulary boxes */
+    .vocab-grid{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+
+    .vocab{
+      flex:1;
+      min-width:220px;
+      border-radius:10px;
+      padding:14px;
+      border:2px solid #dfeefe;
+      background:#fff;
+    }
+
+    .vocab.green{
+      border-color:#c9f3dc;
+      background:#f5fff6;
+    }
+
+    .vocab h3{
+      margin:0;
+      font-size:1rem;
+      color:#154360;
+    }
+
+    .vocab p{
+      margin:8px 0 0 0;
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    /* Transcrição / gravação buttons */
+    .media-row{
+      display:flex;
+      gap:14px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+
+    .media-btn{
+      background:#fff;
+      border:1px solid var(--border);
+      padding:12px 16px;
+      border-radius:10px;
+      font-weight:700;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      min-width:200px;
+      justify-content:center;
+    }
+
+    /* Homework box */
+    .homework{
+      background:#f3fff6;
+      border:1px solid #d7f5df;
+      border-radius:10px;
+      padding:14px;
+      margin-top:10px;
+    }
+
+    /* ===== TALK TIME – TABELA RETANGULAR ===== */
+    .speaking{
+      margin-top:18px;
+      padding:16px;
+      border-radius:12px;
+      background:linear-gradient(180deg,#ffffff,#fbfdff);
+      border:1px solid var(--border);
+      max-width:640px;
+    }
+
+    .speaking h2{
+      margin:0 0 10px 0;
+      font-size:1.05rem;
+      color:#0f1724;
+    }
+
+    .talk-table{
+      width:100%;
+      border-collapse:collapse;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+      border:1px solid #e1e9f5;
+      font-size:0.9rem;
+    }
+
+    .talk-table th,
+    .talk-table td{
+      padding:8px 10px;
+      text-align:left;
+    }
+
+    .talk-table th{
+      background:#eef4ff;
+      color:#1b3556;
+      font-weight:700;
+      border-bottom:1px solid #dde6fa;
+    }
+
+    .row-teacher{
+      background:#e7f2ff; /* azul clarinho */
+    }
+
+    .row-student{
+      background:#e8f7ef; /* verde clarinho */
+    }
+
+    .talk-label{
+      font-weight:700;
+    }
+
+    .talk-percent{
+      font-weight:700;
+      color:#0f1724;
+    }
+
+    .talk-time{
+      color:var(--muted);
+    }
+
+    footer{
+      margin-top:20px;
+      color:var(--muted);
+      font-size:0.9rem;
+      text-align:center;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      .card{padding:18px;border-radius:14px;}
+      .vocab-grid{flex-direction:column;}
+      .media-row{flex-direction:column;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <article class="card" role="main">
+      <header>
+        <div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="badge">PÓS-AULA</span>
+            <h1>Sleep &amp; Naps — Rotina, higiene do sono e o que o cérebro faz</h1>
+          </div>
+          <div class="meta" style="margin-top:8px;">
+            <strong>Professor:</strong> César &nbsp;•&nbsp;
+            <strong>Aluno:</strong> Gu &nbsp;•&nbsp;
+            <strong>Data:</strong> 25/02/2026
+          </div>
+        </div>
+
+        <div class="actions">
+          <a class="btn" href="#" onclick="window.print();return false;">Imprimir / Salvar PDF</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="panel">
+          <p style="margin:0;font-weight:600;color:#08325a;">
+            Conversa guiada sobre <strong>sono</strong>, <strong>sonecas (naps)</strong>, higiene do sono e o papel do cérebro durante a noite, com trechos de vídeo para apoiar o vocabulário e as ideias.
+          </p>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Resumo da Aula</h2>
+          <div class="outline-card">
+            <p style="margin:0 0 8px 0;">
+              Nesta aula, conversamos sobre a rotina do Gu e como ele passa o tempo quando está mais tranquilo (por exemplo,
+              ler um livro, jantar fora e voltar para o quarto). A partir disso, entramos no tema principal: <strong>qualidade do sono</strong>
+              e como pequenos hábitos do dia afetam a noite.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Falamos sobre <strong>cochilos após o almoço</strong> e quando eles ajudam ou atrapalham. Você explicou que costuma dormir cerca de
+              <strong>30 minutos</strong> e que, mesmo assim, consegue dormir novamente à noite. Vimos a ideia de uma queda natural de alerta entre
+              <strong>1PM e 4PM</strong> e a possibilidade de um padrão <strong>biphasic</strong> (um sono longo à noite + um cochilo curto à tarde).
+              A regra prática discutida foi: <strong>cochilo curto (around 20 minutes) e cedo</strong> costuma ser ok; cochilos longos podem prejudicar o sono da noite.
+            </p>
+            <p style="margin:0 0 8px 0;">
+              Depois, aprofundamos o que acontece com o cérebro quando dormimos: ele <strong>organiza memórias</strong> (como se “arquivasse” os eventos do dia)
+              e também <strong>limpa resíduos (waste)</strong> que se acumulam ao longo do dia, especialmente durante o <strong>deep sleep</strong>.
+              Você comentou que percebe diferença clara no desempenho quando dorme bem: mais paciência, decisões mais rápidas e melhor humor.
+            </p>
+            <p style="margin:0;">
+              Por fim, falamos de <strong>sleep hygiene</strong> (higiene do sono) e dos “inimigos” do sono: redes sociais, café/guaraná tarde,
+              comida pesada e estímulos como treino muito tarde ou jogo de futebol muito emocionante. A aula fechou com a ideia de consistência:
+              manter horários parecidos e reduzir telas ajuda a melhorar a qualidade do sono com o tempo.
+            </p>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Key Vocabulary</h2>
+          <div class="vocab-grid">
+            <div class="vocab">
+              <h3>Nap</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) cochilo / soneca</em><br>
+                <small>I usually take a 20-minute nap after lunch.</small>
+              </p>
+            </div>
+            <div class="vocab green">
+              <h3>Sleep hygiene</h3>
+              <p style="margin-top:8px;font-size:0.92rem;color:var(--muted);">
+                <em>(pt) higiene do sono (hábitos que ajudam a dormir melhor)</em><br>
+                <small>Good sleep hygiene includes avoiding screens before bed.</small>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- NOVOS TÓPICOS: VOCABULÁRIO DA AULA, FRASES MODELO, CORREÇÕES -->
+        <section>
+          <h2 style="margin-bottom:8px;">Vocabulário da aula</h2>
+          <div class="outline-card">
+            <h3 style="margin-top:0;">Sono e rotina</h3>
+            <ul>
+              <li><strong>to pass the time</strong> – passar o tempo</li>
+              <li><strong>to get sleepy</strong> – ficar com sono</li>
+              <li><strong>relaxed day</strong> – dia tranquilo</li>
+              <li><strong>routine</strong> – rotina</li>
+              <li><strong>to wake up</strong> – acordar</li>
+              <li><strong>to fall asleep</strong> – pegar no sono</li>
+              <li><strong>to take a nap</strong> – tirar um cochilo</li>
+              <li><strong>to affect</strong> – afetar</li>
+            </ul>
+
+            <h3>Conceitos do vídeo (naps)</h3>
+            <ul>
+              <li><strong>alertness</strong> – estado de alerta</li>
+              <li><strong>drop in alertness</strong> – queda no alerta</li>
+              <li><strong>biphasic pattern</strong> – padrão de sono em duas fases</li>
+              <li><strong>one long stretch (of sleep)</strong> – um período longo e contínuo (de sono)</li>
+              <li><strong>benefit</strong> – benefício / ajudar</li>
+              <li><strong>to harm</strong> – prejudicar</li>
+              <li><strong>struggle to sleep</strong> – ter dificuldade para dormir</li>
+            </ul>
+
+            <h3>O que o cérebro faz durante o sono</h3>
+            <ul>
+              <li><strong>essential</strong> – essencial</li>
+              <li><strong>to organize memories</strong> – organizar memórias</li>
+              <li><strong>to clear waste</strong> – limpar resíduos</li>
+              <li><strong>deep sleep</strong> – sono profundo</li>
+              <li><strong>to retrieve (memories)</strong> – recuperar (memórias)</li>
+              <li><strong>mood</strong> – humor</li>
+              <li><strong>concentration</strong> – concentração</li>
+              <li><strong>health risks</strong> – riscos à saúde</li>
+            </ul>
+
+            <h3>Hábitos e “inimigos” do sono</h3>
+            <ul>
+              <li><strong>screens</strong> – telas</li>
+              <li><strong>to avoid caffeine late</strong> – evitar cafeína tarde</li>
+              <li><strong>heavy food</strong> – comida pesada</li>
+              <li><strong>adrenaline</strong> – adrenalina</li>
+              <li><strong>exciting</strong> – empolgante / muito agitado</li>
+              <li><strong>to underestimate</strong> – subestimar</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2 style="margin-bottom:8px;">Frases modelo da aula</h2>
+          <div class="outline-card">
+            <ul>
+              <li>What do you do to pass the time?</li>
+              <li>I got to my room, took a shower, and read a book.</li>
+              <li>It was a relaxed day.</li>
+              <li>Do you take naps during the day?</li>
+              <li>I sleep for about 30 minutes after lunch.</li>
+              <li>It doesn’t affect my night sleep.</li>
+              <li>There is a natural drop in alertness between 1PM and 4PM.</li>
+              <li>If you struggle to sleep at night, don’t nap.</li>
+              <li>Deep sleep helps clean the brain.</li>
+              <li>Good sleep hygiene includes avoiding screens before bed.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ✅ NOVA SEÇÃO FIXA: CORREÇÕES IMPORTANTES -->
+        <section>
+          <h2 style="margin-bottom:8px;">Correções importantes</h2>
+          <div class="outline-card">
+            <ul>
+              <li>
+                <strong>Falar “conseguir / atingir”</strong><br>
+                ❌ <em>He could achieve.</em><br>
+                ✅ <em>He managed to do it.</em> / <em>He was able to do it.</em><br>
+                <span style="color:var(--muted);font-size:0.94rem;">Para “ele conseguiu”, preferimos <em>managed to</em> (com ideia de esforço) ou <em>was able to</em>.</span>
+              </li>
+              <li>
+                <strong>“Dormir de novo”</strong><br>
+                ❌ <em>I still sleep again at 10PM.</em><br>
+                ✅ <em>I can still fall asleep at 10PM.</em> / <em>I can still sleep at 10PM.</em><br>
+                <span style="color:var(--muted);font-size:0.94rem;">Quando o foco é “pegar no sono”, <em>fall asleep</em> fica mais natural.</span>
+              </li>
+              <li>
+                <strong>“Chegar em um lugar”</strong><br>
+                ✅ <em>I got to my room…</em> (correto)<br>
+                <span style="color:var(--muted);font-size:0.94rem;">Também é comum: <em>I got back to my room…</em> quando você quer destacar que “voltou”.</span>
+              </li>
+              <li>
+                <strong>Horas e rotina</strong><br>
+                ✅ <em>I finished class at 10PM.</em> / <em>I woke up at 5AM.</em><br>
+                <span style="color:var(--muted);font-size:0.94rem;">Boa prática: manter “at + horário” ao falar de rotina.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <!-- ✅ FIM DA NOVA SEÇÃO -->
+
+        <section>
+          <h2 style="margin-bottom:8px;">Transcrição &amp; Gravação</h2>
+          <div class="media-row">
+            <!-- Transcrição sem link (apenas botão) -->
+            <a class="media-btn" href="#" role="button">📄 Acessar transcrição</a>
+
+            <!-- Vídeo da aula com o link que você mandou -->
+            <a
+              class="media-btn"
+              href="https://youtu.be/hoPY_-5BFBI"
+              target="_blank"
+              rel="noopener noreferrer"
+              role="button"
+              style="background:linear-gradient(180deg,#1f6fd1,#2f86e6);color:#fff;border:none;min-width:260px;"
+            >
+              🎥 Assistir gravação (acesso privado)
+            </a>
+          </div>
+        </section>
+
+        <!-- ===== TABELA DE DISTRIBUIÇÃO DE FALA ===== -->
+        <section class="speaking" aria-label="Distribuição de fala">
+          <h2>Tempo de Fala (Talk Time)</h2>
+          <table class="talk-table">
+            <thead>
+              <tr>
+                <th>Quem falou</th>
+                <th>Porcentagem</th>
+                <th>Duração aproximada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-teacher">
+                <td><span class="talk-label">César (Professor)</span></td>
+                <td><span class="talk-percent">60%</span></td>
+                <td class="talk-time">~30 minutos</td>
+              </tr>
+              <tr class="row-student">
+                <td><span class="talk-label">Gu</span></td>
+                <td><span class="talk-percent">40%</span></td>
+                <td class="talk-time">~20 minutos</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <!-- ===== FIM TABELA ===== -->
+
+        <section>
+          <h2 style="margin-bottom:8px;">Homework</h2>
+          <div class="homework">
+            <p style="margin:0 0 8px 0;">
+              📌 <strong>Lição de casa (como combinado):</strong>
+            </p>
+            <ul style="margin:0 0 6px 18px;padding:0;font-size:0.94rem;color:var(--muted);">
+              <li>Ler o pós-aula de <strong>2 a 3x na semana</strong>.</li>
+            </ul>
+            <p style="margin:6px 0 0 0;">
+              <a
+                href="#"
+                class="btn secondary"
+                style="padding:8px 12px;border-radius:8px;font-weight:700;"
+              >
+                ✅ Revisado
+              </a>
+            </p>
+          </div>
+
+          <div style="margin-top:14px;">
+            <a class="btn" href="https://wa.me" style="background:#25D366;border-radius:10px;box-shadow:none;">
+              💬 Falar comigo no WhatsApp
+            </a>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <p style="margin:18px 0 0 0;color:var(--muted);font-size:0.9rem;">
+          © 2026 CZK English • Este conteúdo é exclusivo para fins educacionais. • Suporte: czkenglish@gmail.com
+        </p>
+      </footer>
+    </article>
+  </div>
+</body>
+</html>
